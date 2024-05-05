@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from fabric import task
 from datetime import datetime
 import os
