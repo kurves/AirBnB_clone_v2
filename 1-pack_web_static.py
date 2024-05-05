@@ -1,32 +1,23 @@
 #!/usr/bin/python3
-"""
-script to configure server
-"""
-
-
 from fabric import task
 from datetime import datetime
 import os
+from fabric.api import local, run, env, mkdir
 
+def do_pack():
+  """
+  Generates a .tgz archive of the web_static folder content.
 
-@task
-def do_pack(c):
-    """
-    script to configure server
-    """
+  Returns:
+      str: Path to the generated archive or None on failure.
+  """
+  now = datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S")
+  archive_name = f"versions/web_static_{now}.tgz"
+  run("mkdir -p versions", quiet=True)
 
-    c.run('mkdir -p versions')
+  with local.capture("tar -czf {archive_name} ./web_static") as output:
+    if output.failed:
+      print(f"Error creating archive: {output}")
+      return None
+    return archive_name
 
-    now = datetime.now()
-    timestamp = now.strftime("%Y%m%d%H%M%S")
-
-    archive_name = f"web_static_{timestamp}.tgz"
-
-    archive_path = os.path.join("versions", archive_name)
-
-    result = c.local(f'tar -czvf {archive_path} web_static')
-
-    if result.failed:
-        return None
-    else:
-        return archive_path
