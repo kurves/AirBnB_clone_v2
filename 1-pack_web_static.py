@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 #script to configure server
-
+"""
+script to configure server
+"""
 from fabric import task
 from datetime import datetime
 import os
