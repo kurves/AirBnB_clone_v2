@@ -2,6 +2,8 @@
 """
 script to configure server
 """
+
+
 from fabric import task
 from datetime import datetime
 import os
@@ -9,7 +11,10 @@ import os
 
 @task
 def do_pack(c):
-    """script to configure server"""
+    """
+    script to configure server
+    """
+
     c.run('mkdir -p versions')
 
     now = datetime.now()
