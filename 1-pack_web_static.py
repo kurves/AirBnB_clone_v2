@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-sscript to configure server
-"""
+#script to configure server
 
 from fabric import task
 from datetime import datetime
