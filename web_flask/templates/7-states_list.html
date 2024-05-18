@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<HTML LANG="EN">
+<HEAD>
+    <META CHARSET="UTF-8">
+    <TITLE>STATES</TITLE>
+</HEAD>
+<BODY>
+	<h1>STATES</h1>
+	<ul>
+	{% for state in states %}
+	<li>{{ state.id }}: <b>{{ state.name }}</b></li>
+	{% endfor %}
+	</ul>
+</BODY>
+</HTML>
