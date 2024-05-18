@@ -11,6 +11,8 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from os import getenv
+
 
 class DBStorage:
     """DBStorage class for managing storage of hbnb models in a MySQL database"""
@@ -33,15 +35,16 @@ class DBStorage:
     def all(self, cls=None):
         """Query all objects from the database"""
         objects = {}
-        classes = [User, State, City, Amenity, Place, Review]
         if cls:
-            classes = [cls]
-        for cls in classes:
-            for obj in self.__session.query(cls):
-                key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            for obj in self.__session.query(cls).all():
+                key = obj.__class__.__name__ + '.' + obj.id
                 objects[key] = obj
+        else:
+            for clss in [State, City, User, Place, Review, Amenity]:
+                for obj in self.__session.query(clss).all():
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    objects[key] = obj
         return objects
-
     def new(self, obj):
         """Add an object to the current database session"""
         if obj:
@@ -59,5 +62,10 @@ class DBStorage:
     def reload(self):
         """Create all tables in the database and create the current database session"""
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = scoped_session(Session)
+        Sess = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(Sess)
+        self.__session = Session()
+
+    def close(self):
+        """private session attribute (self.__session)"""
+        self.__session.remove()
