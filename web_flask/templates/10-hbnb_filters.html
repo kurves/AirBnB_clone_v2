@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<HTML LANG="en">
+<HEAD>
+    <META CHARSET="UTF-8">
+    <TITLE>HBNB</TITLE>
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/3-header.css') }}">
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/3-footer.css') }}">
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/4-common.css') }}">
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/6-filters.css') }}">
+</HEAD>
+<BODY>
+    <HEADER>
+        <DIV CLASS="container">
+            <DIV CLASS="header-left">
+                <IMG SRC="{{ url_for('static', filename='images/logo.png') }}" ALT="HBNB logo">
+            </DIV>
+            <DIV CLASS="header-right">
+                <IMG SRC="{{ url_for('static', filename='images/icon.png') }}" ALT="profile icon">
+            </DIV>
+        </DIV>
+    </HEADER>
+    <DIV CLASS="filters">
+        <DIV CLASS="container">
+            <DIV CLASS="filters-title">
+                <H3>States</H3>
+                <H4>&nbsp;</H4>
+            </DIV>
+            <DIV CLASS="filters-list">
+                <UL>
+                    {% for state in states %}
+                    <LI>{{ state.name }}
+                        <UL>
+                            {% for city in state.cities %}
+                            <LI>{{ city.name }}</LI>
+                            {% endfor %}
+                        </UL>
+                    </LI>
+                    {% endfor %}
+                </UL>
+            </DIV>
+            <DIV CLASS="filters-title">
+                <H3>Amenities</H3>
+                <H4>&nbsp;</H4>
+            </DIV>
+            <DIV CLASS="filters-list">
+                <UL>
+                    {% for amenity in amenities %}
+                    <LI>{{ amenity.name }}</LI>
+                    {% endfor %}
+                </UL>
+            </DIV>
+        </DIV>
+    </DIV>
+    <FOOTER>
+        <DIV CLASS="container">
+            <P>&copy; 2023 Holberton School</P>
+        </DIV>
+    </FOOTER>
+</BODY>
+</HTML>
