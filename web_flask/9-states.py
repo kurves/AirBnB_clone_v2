@@ -8,6 +8,7 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.route('/states', strict_slashes=False)
 def states():
     """Display a HTML of all State objects"""
@@ -21,6 +22,7 @@ def state_cities(id):
         if state.id == id:
             return render_template("9-states.html", state=state)
     return render_template("9-states.html")
+
 @app.teardown_appcontext
 def teardown_db(exception):
     """Close the current SQLAlchemy Session"""
