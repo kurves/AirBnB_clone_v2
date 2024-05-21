@@ -11,7 +11,7 @@ app = Flask(__name__)
 def states_list():
     """Display a HTML of all State objects"""
     states = storage.all(State).values()
-    return render_template('states_list.html', states=sorted(states, key=lambda x: x.name))
+    return render_template('9-states.html', states=sorted(states, key=lambda x: x.name))
 
 @app.route('/states/<id>', strict_slashes=False)
 def state_cities(id):
@@ -23,7 +23,7 @@ def state_cities(id):
             state = st
             break
     if state:
-        return render_template('state_cities.html', state=state)
+        return render_template('9-states.html', state=state)
     else:
         return render_template('not_found.html')
 
