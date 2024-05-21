@@ -3,6 +3,7 @@
 """script to create flask app"""
 
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -47,14 +48,14 @@ def number_template(n):
     """
     View function for the /number_template/<n> route.
     """
-    return render_template('number.html', number=n)
+    return render_template('number.html', n=n)
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_or_even(n):
     """Display a HTML page only if n is an integer"""
     parity = "even" if n % 2 == 0 else "odd"
-    return render_template('number_odd_or_even.html', number=n, parity=parity)
+    return render_template('number_odd_or_even.html', n=n, parity=parity)
 
 
 if __name__ == '__main__':
